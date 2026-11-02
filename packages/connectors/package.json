@@ -11,19 +11,19 @@
       "default": "./dist/src/index.js"
     },
     "./testing/replay": {
-      "types": "./dist/tests/support/replay.d.ts",
-      "default": "./dist/tests/support/replay.js"
+      "types": "./dist/src/shared/tests/replay.d.ts",
+      "default": "./dist/src/shared/tests/replay.js"
     },
     "./testing/drive-server": {
-      "types": "./dist/tests/support/drive-server.d.ts",
-      "default": "./dist/tests/support/drive-server.js"
+      "types": "./dist/src/drive/tests/drive-server.d.ts",
+      "default": "./dist/src/drive/tests/drive-server.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && cp -R tests/fixtures dist/tests/fixtures",
+    "build": "tsc -p tsconfig.build.json && mkdir -p dist/tests && cp -R tests/fixtures dist/tests/fixtures",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "mutate": "stryker run"

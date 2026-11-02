@@ -1,4 +1,4 @@
-import type { Manifest } from "../catalog/types.js";
+import type { Manifest } from "../catalog/registry/types.js";
 import { createSlackConnector } from "./connector.js";
 
 /** Slack as a catalog entry: channels are company-wide by default, and the ACL narrows private ones. */

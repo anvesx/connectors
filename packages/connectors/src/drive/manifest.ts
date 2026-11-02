@@ -1,4 +1,4 @@
-import type { Manifest } from "../catalog/types.js";
+import type { Manifest } from "../catalog/registry/types.js";
 import { createDriveConnector } from "./connector.js";
 
 /** Google Drive as a catalog entry. It signs in through the shared `google` OAuth client. */

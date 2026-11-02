@@ -1,4 +1,4 @@
-import type { Manifest } from "../catalog/types.js";
+import type { Manifest } from "../catalog/registry/types.js";
 import { createGithubConnector } from "./connector.js";
 
 /** GitHub as a catalog entry. One account covers one `owner/name` repository. */

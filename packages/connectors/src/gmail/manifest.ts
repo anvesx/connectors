@@ -1,4 +1,4 @@
-import type { Manifest } from "../catalog/types.js";
+import type { Manifest } from "../catalog/registry/types.js";
 import { createGmailConnector } from "./connector.js";
 
 /** Gmail as a catalog entry. It signs in through the shared `google` OAuth client; mail is private by default. */

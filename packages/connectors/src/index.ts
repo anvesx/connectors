@@ -1,7 +1,7 @@
-export { createBuiltinRegistry, hasLiveRecheck } from "./catalog/builtin.js";
-export { type CustomSpec, customManifest } from "./catalog/http.js";
-export { createRegistry, ID as MANIFEST_ID, type Listed, type Registry } from "./catalog/registry.js";
-export type { Auth, LoadConfig, Manifest, OAuth2Auth } from "./catalog/types.js";
+export { createBuiltinRegistry, hasLiveRecheck } from "./catalog/builtin/builtin.js";
+export { type CustomSpec, customManifest } from "./catalog/http/http.js";
+export { createRegistry, ID as MANIFEST_ID, type Listed, type Registry } from "./catalog/registry/registry.js";
+export type { Auth, LoadConfig, Manifest, OAuth2Auth } from "./catalog/registry/types.js";
 export { createDriveConnector, type DriveConfig } from "./drive/connector.js";
 export { driveManifest } from "./drive/manifest.js";
 export { createGithubConnector, type GithubConfig } from "./github/connector.js";

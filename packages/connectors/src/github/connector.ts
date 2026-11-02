@@ -4,7 +4,7 @@ import { badCursor, guarded, statusOf } from "../shared/errors.js";
 import type { CommonConfig, SourceConnector } from "../shared/types.js";
 import { changesSince } from "./changes.js";
 import { isListable, mapAcl, mapDoc } from "./map.js";
-import { listTeamMembers } from "./members.js";
+import { listTeamMembers } from "./members/members.js";
 
 export type GithubConfig = CommonConfig & { owner: string; repo: string; baseUrl?: string };
 

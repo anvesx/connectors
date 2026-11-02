@@ -1,1 +1,7 @@
-{ "extends": "../../tsconfig.base.json", "include": ["src", "tests/support"], "compilerOptions": { "outDir": "dist", "rootDir": "." } }
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
+  "exclude": ["src/**/tests"],
+  "files": ["src/shared/tests/replay.ts", "src/drive/tests/drive-server.ts"],
+  "compilerOptions": { "outDir": "dist", "rootDir": "." }
+}

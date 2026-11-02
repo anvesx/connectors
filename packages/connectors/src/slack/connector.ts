@@ -1,8 +1,8 @@
 import { WebClient } from "@slack/web-api";
 import type { CommonConfig, SourceConnector } from "../shared/types.js";
-import { changesSince } from "./changes.js";
+import { changesSince } from "./changes/changes.js";
 import { guardSlack, mapChannel, slackCode, TYPES, toText } from "./map.js";
-import { listSlackMembers } from "./members.js";
+import { listSlackMembers } from "./members/members.js";
 
 export type SlackConfig = CommonConfig & { baseUrl?: string; retries?: number; now?: () => number };
 

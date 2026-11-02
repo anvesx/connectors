@@ -44,16 +44,16 @@ pnpm test        # mapping tests, plus the adapters run against recorded fixture
 pnpm typecheck
 ```
 
-`tests/replay` runs the real SDKs against a local HTTP server that answers with the JSON files in `tests/fixtures`.
+`src/*/tests` run the real SDKs against a local HTTP server that answers with the JSON files in `tests/fixtures`.
 Those fixtures follow the response shapes in the GitHub and Drive API docs; they were not captured from a live account.
 
 ### Live integration tests
 
-`tests/integration` calls the real APIs and is skipped (`it.skipIf`) unless the environment is set:
+`src/github/tests/live.test.ts` and `src/drive/tests/live.test.ts` call the real APIs and are skipped (`it.skipIf`) unless the environment is set:
 
 ```sh
-GITHUB_TOKEN=ghp_... GITHUB_TEST_REPO=owner/repo pnpm test -- tests/integration/github.live.test.ts
-DRIVE_ACCESS_TOKEN=ya29... pnpm test -- tests/integration/drive.live.test.ts   # OAuth token with drive.readonly
+GITHUB_TOKEN=ghp_... GITHUB_TEST_REPO=owner/repo pnpm test -- src/github/tests/live.test.ts
+DRIVE_ACCESS_TOKEN=ya29... pnpm test -- src/drive/tests/live.test.ts   # OAuth token with drive.readonly
 ```
 
 The GitHub token needs push access to the repo (collaborator listing) and `repo` read scope.
@@ -62,4 +62,4 @@ The GitHub token needs push access to the repo (collaborator listing) and `repo`
 
 `@anvesx/connectors/testing/replay` (`startReplay`, `fixture`) and `@anvesx/connectors/testing/drive-server`
 (`startDrive`) are the same local servers this package's own tests use. Apps that consume the adapters can point the real
-SDKs at them instead of mocking. The build copies `tests/fixtures` next to them.
+SDKs at them instead of mocking. The build copies `tests/fixtures` next to them (`dist/tests/fixtures`).
