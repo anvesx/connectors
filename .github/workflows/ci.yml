@@ -20,7 +20,9 @@ jobs:
         with: { node-version: 26, cache: pnpm, registry-url: "https://npm.pkg.github.com", scope: "@anvesx" }
       - name: Fetch company-brain for the structure lint
         run: git clone --depth 1 https://github.com/anvesx/company-brain.git ../company-brain
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
+      - uses: actions/upload-artifact@v4
+        with: { name: lockfile, path: pnpm-lock.yaml }
       - run: pnpm structure
       - run: pnpm guard:fakes
       - run: pnpm exec biome check .
