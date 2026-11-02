@@ -5,4 +5,5 @@
 - `github/` the GitHub adapter
 - `drive/` the Google Drive adapter
 - `slack/` the Slack adapter
+- `gmail/` the Gmail adapter
 - `catalog/` manifest type, registry, built-in registry and the HTTP custom connector

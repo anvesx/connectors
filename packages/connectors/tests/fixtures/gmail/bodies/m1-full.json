@@ -1,0 +1,35 @@
+{
+  "id": "m1",
+  "threadId": "t1",
+  "historyId": "4100",
+  "internalDate": "1761900000000",
+  "payload": {
+    "mimeType": "multipart/alternative",
+    "headers": [
+      {
+        "name": "Subject",
+        "value": "Expense policy"
+      },
+      {
+        "name": "From",
+        "value": "bob@acme.test"
+      }
+    ],
+    "parts": [
+      {
+        "mimeType": "text/plain",
+        "body": {
+          "size": 40,
+          "data": "UmVpbWJ1cnNlbWVudHMgYXJlIHBhaWQgd2l0aGluIDEwIGRheXMuCg"
+        }
+      },
+      {
+        "mimeType": "text/html",
+        "body": {
+          "size": 50,
+          "data": "PHA-UmVpbWJ1cnNlbWVudHMgYXJlIHBhaWQgd2l0aGluIDEwIGRheXMuPC9wPg"
+        }
+      }
+    ]
+  }
+}

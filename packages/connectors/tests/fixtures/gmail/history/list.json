@@ -1,0 +1,36 @@
+{
+  "history": [
+    {
+      "id": "4400",
+      "messagesAdded": [
+        {
+          "message": {
+            "id": "m4",
+            "threadId": "t3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "4500",
+      "messagesAdded": [
+        {
+          "message": {
+            "id": "m5",
+            "threadId": "t3"
+          }
+        }
+      ],
+      "messagesDeleted": [
+        {
+          "message": {
+            "id": "m1",
+            "threadId": "t1"
+          }
+        }
+      ]
+    }
+  ],
+  "nextPageToken": "h2",
+  "historyId": "5000"
+}
