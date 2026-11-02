@@ -34,17 +34,17 @@
     "@slack/web-api": "^8.3.0"
   },
   "peerDependencies": {
-    "@brain/connector-kit": ">=0.1.0",
-    "@brain/core-types": ">=0.1.0"
+    "@anvesx/connector-kit": ">=0.1.0",
+    "@anvesx/core-types": ">=0.1.0"
   },
   "devDependencies": {
-    "@brain/connector-kit": "link:../../../company-brain/features/connector-kit",
-    "@brain/core-types": "link:../../../company-brain/features/core-types"
+    "@anvesx/connector-kit": "link:../../../company-brain/features/connector-kit",
+    "@anvesx/core-types": "link:../../../company-brain/features/core-types"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anvesx/connectors.git",
     "directory": "packages/connectors"
   },
-  "license": "UNLICENSED"
+  "license": "MIT"
 }
