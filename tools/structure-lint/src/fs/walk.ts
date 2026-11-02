@@ -10,6 +10,7 @@ const tierFolders: ReadonlyArray<readonly [string, Tier]> = [
   ["services", "service"],
   ["modules", "module"],
   ["apps", "app"],
+  ["packages", "service"],
   ["tools", "tool"],
 ];
 

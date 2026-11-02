@@ -16,7 +16,7 @@ const files = (dir: string): string[] =>
     : [];
 
 export const packageDirs = (root: string): string[] =>
-  ["features", "services", "modules", "apps", "tools"].flatMap((tier) =>
+  ["features", "services", "modules", "apps", "packages", "tools"].flatMap((tier) =>
     existsSync(join(root, tier))
       ? readdirSync(join(root, tier), { withFileTypes: true })
           .filter((e) => e.isDirectory() && existsSync(join(root, tier, e.name, "package.json")))
