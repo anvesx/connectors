@@ -1,4 +1,4 @@
-import type { Membership } from "@brain/connector-kit";
+import type { Membership } from "@anvesx/connector-kit";
 import type { WebClient } from "@slack/web-api";
 import { channelGroup, pages, WORKSPACE } from "./map.js";
 

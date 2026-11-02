@@ -9,7 +9,7 @@ const cli = resolve("bin/cli.mjs");
 const run = (root: string) => spawnSync(process.execPath, [cli, "--root", root], { encoding: "utf8" });
 const runAsync = promisify(execFile);
 const base = (name: string) => ({
-  [`features/${name}/package.json`]: packageJson(`@brain/${name}`),
+  [`features/${name}/package.json`]: packageJson(`@anvesx/${name}`),
   [`features/${name}/README.md`]: "# package",
   [`features/${name}/src/README.md`]: "# source",
   [`features/${name}/tests/.keep`]: "",
@@ -26,7 +26,7 @@ describe("structure-lint CLI", () => {
       "features/one/src/long.ts": Array(81).fill("x").join("\n"),
       "features/one/src/missing/code.ts": "",
       "features/two/src/many/README.md": "# source",
-      "features/two/package.json": packageJson("@brain/two", { "@brain/one": "workspace:*" }),
+      "features/two/package.json": packageJson("@anvesx/two", { "@anvesx/one": "workspace:*" }),
     });
     const result = run(root);
     expect(result.status).toBe(1);

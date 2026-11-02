@@ -1,5 +1,5 @@
-import { type Connector, ConnectorError, type ListedDoc } from "@brain/connector-kit";
-import { AclSchema } from "@brain/core-types";
+import { type Connector, ConnectorError, type ListedDoc } from "@anvesx/connector-kit";
+import { AclSchema } from "@anvesx/core-types";
 import type { Auth, Manifest } from "./types.js";
 
 /** What an admin registers: sign-in settings plus an HTTP endpoint that speaks the connector contract. */

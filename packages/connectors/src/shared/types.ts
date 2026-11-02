@@ -1,5 +1,5 @@
-import type { Connector } from "@brain/connector-kit";
-import type { Zone } from "@brain/core-types";
+import type { Connector } from "@anvesx/connector-kit";
+import type { Zone } from "@anvesx/core-types";
 
 export type ChangeEvent = { address: string; kind: "upsert" | "delete" };
 export type ChangeSet = { events: ChangeEvent[]; next: string };

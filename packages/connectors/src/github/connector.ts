@@ -1,4 +1,4 @@
-import { ConnectorError } from "@brain/connector-kit";
+import { ConnectorError } from "@anvesx/connector-kit";
 import { Octokit } from "@octokit/rest";
 import { badCursor, guarded, statusOf } from "../shared/errors.js";
 import type { CommonConfig, SourceConnector } from "../shared/types.js";

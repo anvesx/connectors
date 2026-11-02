@@ -51,10 +51,10 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0
     devDependencies:
-      '@brain/connector-kit':
+      '@anvesx/connector-kit':
         specifier: link:../../../company-brain/features/connector-kit
         version: link:../../../company-brain/features/connector-kit
-      '@brain/core-types':
+      '@anvesx/core-types':
         specifier: link:../../../company-brain/features/core-types
         version: link:../../../company-brain/features/core-types
 

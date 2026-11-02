@@ -1,4 +1,4 @@
-import { ConnectorError } from "@brain/connector-kit";
+import { ConnectorError } from "@anvesx/connector-kit";
 
 /** HTTP status from an Octokit `RequestError` (`status`) or a Gaxios error (`status`, `response.status`, numeric `code`). */
 export const statusOf = (error: unknown): number | undefined => {

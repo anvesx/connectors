@@ -51,7 +51,7 @@ before use. Set `canRead` to `true` only if the service implements `/can-read`.
 
 ## Shared contracts
 
-The `Connector` type lives in `@brain/connector-kit` and the shared types in `@brain/core-types`, both in
+The `Connector` type lives in `@anvesx/connector-kit` and the shared types in `@anvesx/core-types`, both in
 [anvesx/company-brain](https://github.com/anvesx/company-brain) under `features/`. This package lists them as peer
 dependencies. They are not on any registry yet, and a git install cannot work: the packages have no build output in
 git and depend on each other through `workspace:*`. Until a registry is chosen, a development install links a
@@ -59,7 +59,7 @@ sibling checkout:
 
 ```sh
 git clone https://github.com/anvesx/company-brain.git ../company-brain
-(cd ../company-brain && pnpm install --filter @brain/connector-kit... && pnpm --filter @brain/core-types --filter @brain/connector-kit build)
+(cd ../company-brain && pnpm install --filter @anvesx/connector-kit... && pnpm --filter @anvesx/core-types --filter @anvesx/connector-kit build)
 pnpm install
 ```
 

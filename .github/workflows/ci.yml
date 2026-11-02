@@ -17,8 +17,8 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/anvesx/company-brain.git ../company-brain
           cd ../company-brain
-          pnpm install --frozen-lockfile --filter "@brain/connector-kit..."
-          pnpm --filter @brain/core-types --filter @brain/connector-kit build
+          pnpm install --frozen-lockfile --filter "@anvesx/connector-kit..."
+          pnpm --filter @anvesx/core-types --filter @anvesx/connector-kit build
       - run: pnpm install --frozen-lockfile
       - run: pnpm structure
       - run: pnpm guard:fakes

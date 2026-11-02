@@ -1,6 +1,6 @@
 # structure-lint
 
-`@brain/structure-lint` is the repository's structural CI gate. It checks every package directly
+`@anvesx/structure-lint` is the repository's structural CI gate. It checks every package directly
 under `features`, `services`, `modules`, `apps`, `packages` (treated as services) and `tools`, then prints deterministic
 `file:rule:message` diagnostics.
 

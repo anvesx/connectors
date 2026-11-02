@@ -1,5 +1,5 @@
-import type { Connector } from "@brain/connector-kit";
-import type { Zone } from "@brain/core-types";
+import type { Connector } from "@anvesx/connector-kit";
+import type { Zone } from "@anvesx/core-types";
 
 /** `app` names the OAuth client (id and secret) the sign-in uses; manifests with the same `app` share one client. It defaults to the manifest id. */
 export type OAuth2Auth = {

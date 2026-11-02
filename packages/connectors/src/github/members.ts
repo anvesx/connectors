@@ -1,4 +1,4 @@
-import type { Membership } from "@brain/connector-kit";
+import type { Membership } from "@anvesx/connector-kit";
 import type { Octokit } from "@octokit/rest";
 import { statusOf } from "../shared/errors.js";
 

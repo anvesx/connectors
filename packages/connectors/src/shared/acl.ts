@@ -1,5 +1,5 @@
-import { contentHash } from "@brain/connector-kit";
-import type { Acl } from "@brain/core-types";
+import { contentHash } from "@anvesx/connector-kit";
+import type { Acl } from "@anvesx/core-types";
 
 const unique = (values: readonly string[]): string[] => [...new Set(values)].sort();
 

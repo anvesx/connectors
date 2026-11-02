@@ -6,7 +6,7 @@ import { cleanFixtures, fixture, packageJson } from "./fixture.js";
 afterEach(cleanFixtures);
 
 const manifest = (name: string, dependencies: Record<string, string> = {}) =>
-  [`${name}/package.json`, packageJson(`@brain/${name.split("/")[1]}`, dependencies)] as const;
+  [`${name}/package.json`, packageJson(`@anvesx/${name.split("/")[1]}`, dependencies)] as const;
 
 const dirs = (root: string, entries: (readonly [string, string])[]) => entries.map(([path]) => join(root, path, ".."));
 
@@ -14,10 +14,10 @@ describe("tier direction rule", () => {
   it("allows only the documented downward dependency edges", () => {
     const entries = [
       manifest("features/core-types"),
-      manifest("features/one", { "@brain/core-types": "workspace:*" }),
-      manifest("services/api", { "@brain/one": "workspace:*" }),
-      manifest("modules/search", { "@brain/api": "workspace:*", "@brain/one": "workspace:*" }),
-      manifest("apps/web", { "@brain/search": "workspace:*", "@brain/api": "workspace:*", "@brain/one": "workspace:*" }),
+      manifest("features/one", { "@anvesx/core-types": "workspace:*" }),
+      manifest("services/api", { "@anvesx/one": "workspace:*" }),
+      manifest("modules/search", { "@anvesx/api": "workspace:*", "@anvesx/one": "workspace:*" }),
+      manifest("apps/web", { "@anvesx/search": "workspace:*", "@anvesx/api": "workspace:*", "@anvesx/one": "workspace:*" }),
       manifest("tools/lint"),
     ];
     const root = fixture(Object.fromEntries(entries));
@@ -28,32 +28,32 @@ describe("tier direction rule", () => {
     const entries = [
       manifest("features/core-types"),
       manifest("features/one"),
-      manifest("features/two", { "@brain/one": "workspace:*" }),
+      manifest("features/two", { "@anvesx/one": "workspace:*" }),
       manifest("services/a"),
-      manifest("services/b", { "@brain/a": "workspace:*" }),
-      manifest("modules/m", { "@brain/m2": "workspace:*" }),
+      manifest("services/b", { "@anvesx/a": "workspace:*" }),
+      manifest("modules/m", { "@anvesx/m2": "workspace:*" }),
       manifest("modules/m2"),
-      manifest("apps/web", { "@brain/a": "workspace:*", "@brain/web2": "workspace:*" }),
-      manifest("apps/web2", { "@brain/lint": "workspace:*" }),
-      manifest("tools/lint", { "@brain/one": "workspace:*", "@brain/m": "workspace:*", "@brain/web2": "workspace:*" }),
+      manifest("apps/web", { "@anvesx/a": "workspace:*", "@anvesx/web2": "workspace:*" }),
+      manifest("apps/web2", { "@anvesx/lint": "workspace:*" }),
+      manifest("tools/lint", { "@anvesx/one": "workspace:*", "@anvesx/m": "workspace:*", "@anvesx/web2": "workspace:*" }),
     ];
     const root = fixture(Object.fromEntries(entries));
     const found = checkTiers(root, dirs(root, entries));
     expect(found).toHaveLength(6);
-    expect(found.filter((item) => item.message.includes("@brain/lint"))).toHaveLength(2);
+    expect(found.filter((item) => item.message.includes("@anvesx/lint"))).toHaveLength(2);
     expect(found[0]?.file).toBe("features/two/package.json");
-    expect(found[0]?.message).toContain("may not depend on @brain/one");
+    expect(found[0]?.message).toContain("may not depend on @anvesx/one");
   });
 
   it("checks every dependency field and ignores third-party packages", () => {
     const root = fixture({
-      "features/core-types/package.json": packageJson("@brain/core-types"),
-      "features/a/package.json": packageJson("@brain/a"),
+      "features/core-types/package.json": packageJson("@anvesx/core-types"),
+      "features/a/package.json": packageJson("@anvesx/a"),
       "features/b/package.json": JSON.stringify({
-        name: "@brain/b",
-        devDependencies: { "@brain/a": "*" },
-        peerDependencies: { "@brain/a": "*" },
-        optionalDependencies: { "@brain/a": "*", zod: "*" },
+        name: "@anvesx/b",
+        devDependencies: { "@anvesx/a": "*" },
+        peerDependencies: { "@anvesx/a": "*" },
+        optionalDependencies: { "@anvesx/a": "*", zod: "*" },
       }),
     });
     const packages = ["core-types", "a", "b"].map((name) => ({
@@ -70,7 +70,7 @@ describe("tier direction rule", () => {
     };
     expect(run("{")).toThrow(/invalid JSON/);
     for (const value of ["null", "{}", JSON.stringify({ name: 1 })]) expect(run(value)).toThrow(/package name is missing/);
-    for (const value of [null, [], "bad"]) expect(run(JSON.stringify({ name: "@brain/a", dependencies: value }))).toThrow(/must be an object/);
+    for (const value of [null, [], "bad"]) expect(run(JSON.stringify({ name: "@anvesx/a", dependencies: value }))).toThrow(/must be an object/);
     const root = fixture({
       "features/a/package.json": packageJson("same"),
       "features/b/package.json": packageJson("same"),

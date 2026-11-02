@@ -1,4 +1,4 @@
-import { ConnectorError } from "@brain/connector-kit";
+import { ConnectorError } from "@anvesx/connector-kit";
 import { auth, drive } from "@googleapis/drive";
 import { badCursor, guarded, statusOf, toConnectorError } from "../shared/errors.js";
 import type { CommonConfig, SourceConnector } from "../shared/types.js";

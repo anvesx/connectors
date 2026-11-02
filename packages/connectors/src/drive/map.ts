@@ -1,5 +1,5 @@
-import type { ListedDoc } from "@brain/connector-kit";
-import type { Acl, Zone } from "@brain/core-types";
+import type { ListedDoc } from "@anvesx/connector-kit";
+import type { Acl, Zone } from "@anvesx/core-types";
 import { buildAcl } from "../shared/acl.js";
 import type { ChangeEvent } from "../shared/types.js";
 

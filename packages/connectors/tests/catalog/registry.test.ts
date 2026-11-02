@@ -1,4 +1,4 @@
-import type { Connector } from "@brain/connector-kit";
+import type { Connector } from "@anvesx/connector-kit";
 import { describe, expect, it } from "vitest";
 import { createRegistry, type Manifest } from "../../src/index.js";
 

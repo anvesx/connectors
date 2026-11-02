@@ -1,5 +1,5 @@
-import { ConnectorError, type ListedDoc } from "@brain/connector-kit";
-import type { Zone } from "@brain/core-types";
+import { ConnectorError, type ListedDoc } from "@anvesx/connector-kit";
+import type { Zone } from "@anvesx/core-types";
 import { buildAcl } from "../shared/acl.js";
 import { badCursor } from "../shared/errors.js";
 
