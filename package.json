@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "structure": "node tools/structure-lint/bin/cli.mjs",
+    "structure": "node ../company-brain/tools/structure-lint/bin/cli.mjs --root .",
     "guard:fakes": "node tools/fake-guard/bin/cli.mjs",
     "test": "turbo run test",
     "build": "turbo run build",

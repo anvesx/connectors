@@ -6,7 +6,7 @@ A catalog of connectors that let software read documents from other apps, and a 
 reading. Today it ships Google Drive, GitHub, Slack and Gmail. Anyone can add another app, and a company can plug in its own system
 over plain HTTP without changing this repository.
 
-The only package is `packages/connectors`, published as `@anvesx/connectors`. Its own README lists the API.
+The only package is `services/connectors`, published as `@anvesx/connectors`. Its own README lists the API.
 
 ## What a manifest is
 
@@ -27,9 +27,9 @@ names an app directly. Manifests that share an `auth.app` value share one OAuth 
 
 ## Add an app
 
-1. Make a folder under `packages/connectors/src/<app>/` with `connector.ts` (the adapter) and `manifest.ts`.
-2. Write the failing tests first in `packages/connectors/tests/`. Run the real vendor SDK against a local HTTP
-   server that answers with recorded JSON, as `tests/replay` does for GitHub and Drive.
+1. Make a folder under `services/connectors/src/<app>/` with `connector.ts` (the adapter) and `manifest.ts`.
+2. Write the failing tests first in `services/connectors/tests/`. Run the real vendor SDK against a local HTTP
+   server that answers with recorded JSON, as `src/testing/replay.ts` does for GitHub and Drive.
 3. Export the manifest and add one line to `src/catalog/builtin.ts` that registers it.
 4. Add a `README.md` to the new folder.
 
@@ -71,7 +71,7 @@ CI does the same steps before it installs this repository.
 pnpm test        # Vitest, one package at a time through turbo
 pnpm typecheck
 pnpm lint        # Biome
-pnpm structure   # files at most 80 lines, at most 5 files per folder, a README in every folder
+pnpm structure   # strict lint from company-brain/tools/structure-lint (needs the sibling checkout): files at most 80 lines, at most 5 per folder, README everywhere, tests in tests/ beside src
 pnpm guard:fakes # no mocks or in-memory stand-ins in integration tests
 ```
 
