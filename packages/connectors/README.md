@@ -56,3 +56,9 @@ DRIVE_ACCESS_TOKEN=ya29... pnpm test -- tests/integration/drive.live.test.ts   #
 ```
 
 The GitHub token needs push access to the repo (collaborator listing) and `repo` read scope.
+
+## Test support for consumers
+
+`@anvesx/connectors/testing/replay` (`startReplay`, `fixture`) and `@anvesx/connectors/testing/drive-server`
+(`startDrive`) are the same local servers this package's own tests use. Apps that consume the adapters can point the real
+SDKs at them instead of mocking. The build copies `tests/fixtures` next to them.

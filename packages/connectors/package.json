@@ -3,13 +3,27 @@
   "version": "0.1.0",
   "description": "A catalog of connector manifests and source adapters (Google Drive, GitHub) with support for custom HTTP connectors.",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    },
+    "./testing/replay": {
+      "types": "./dist/tests/support/replay.d.ts",
+      "default": "./dist/tests/support/replay.js"
+    },
+    "./testing/drive-server": {
+      "types": "./dist/tests/support/drive-server.d.ts",
+      "default": "./dist/tests/support/drive-server.js"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && cp -R tests/fixtures dist/tests/fixtures",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
