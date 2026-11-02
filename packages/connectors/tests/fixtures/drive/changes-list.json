@@ -1,0 +1,9 @@
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "14502",
+  "changes": [
+    { "kind": "drive#change", "type": "file", "fileId": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms", "removed": false, "file": { "trashed": false } },
+    { "kind": "drive#change", "type": "file", "fileId": "1aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789AbCdEf", "removed": true },
+    { "kind": "drive#change", "type": "file", "fileId": "1TrashedFileId000000000000000000000000000000", "removed": false, "file": { "trashed": true } }
+  ]
+}

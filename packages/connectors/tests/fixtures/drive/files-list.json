@@ -1,0 +1,28 @@
+{
+  "kind": "drive#fileList",
+  "nextPageToken": "~!!~AI9FV7Q1x2",
+  "files": [
+    {
+      "id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms",
+      "name": "Leave policy",
+      "mimeType": "application/vnd.google-apps.document",
+      "version": "42",
+      "modifiedTime": "2026-10-28T14:03:11.000Z",
+      "permissions": [
+        { "id": "p1", "type": "user", "role": "owner", "emailAddress": "alice@acme.test" },
+        { "id": "p2", "type": "user", "role": "reader", "emailAddress": "bob@acme.test" },
+        { "id": "p3", "type": "group", "role": "commenter", "emailAddress": "hr@acme.test" },
+        { "id": "p4", "type": "domain", "role": "reader", "domain": "acme.test" },
+        { "id": "p5", "type": "user", "role": "reader", "emailAddress": "gone@acme.test", "deleted": true }
+      ]
+    },
+    {
+      "id": "1aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789AbCdEf",
+      "name": "notes.txt",
+      "mimeType": "text/plain",
+      "version": "7",
+      "modifiedTime": "2026-10-01T08:00:00.000Z",
+      "permissions": [{ "id": "p6", "type": "anyone", "role": "reader" }]
+    }
+  ]
+}

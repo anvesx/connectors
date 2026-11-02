@@ -1,0 +1,4 @@
+[
+  { "id": 1, "name": "Justice League", "slug": "justice-league", "permission": "pull", "privacy": "closed" },
+  { "id": 2, "name": "Docs", "slug": "docs", "permission": "push", "privacy": "closed" }
+]

@@ -1,0 +1,10 @@
+{
+  "status": "ahead",
+  "ahead_by": 2,
+  "files": [
+    { "filename": "docs/guide.md", "status": "modified", "sha": "3d21ec53a331a6f037a91c368710b99387d012c1" },
+    { "filename": "docs/new.md", "status": "added", "sha": "0a1b2c3d4e5f60718293a4b5c6d7e8f901234567" },
+    { "filename": "docs/old.md", "status": "removed", "sha": "1a1b2c3d4e5f60718293a4b5c6d7e8f901234567" },
+    { "filename": "docs/renamed.md", "status": "renamed", "previous_filename": "docs/before.md", "sha": "2a1b2c3d4e5f60718293a4b5c6d7e8f901234567" }
+  ]
+}

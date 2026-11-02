@@ -1,0 +1,12 @@
+{
+  "sha": "9fb037999f264ba9281fc6cbd2d9dff8d1c1d5b1",
+  "url": "https://api.github.com/repos/acme/handbook/git/trees/9fb037999f264ba9281fc6cbd2d9dff8d1c1d5b1",
+  "truncated": false,
+  "tree": [
+    { "path": "README.md", "mode": "100644", "type": "blob", "sha": "44b4fc6d56897b048c772eb4087f854f46256132", "size": 132 },
+    { "path": "docs", "mode": "040000", "type": "tree", "sha": "f484d249c660418515fb01c254b6bb4d2b7eb7a8" },
+    { "path": "docs/guide.md", "mode": "100644", "type": "blob", "sha": "3d21ec53a331a6f037a91c368710b99387d012c1", "size": 64 },
+    { "path": "docs/video.bin", "mode": "100644", "type": "blob", "sha": "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678", "size": 5242880 },
+    { "path": "vendor", "mode": "160000", "type": "commit", "sha": "7c3f9a1e2b4d5c6f708192a3b4c5d6e7f8091a2b" }
+  ]
+}

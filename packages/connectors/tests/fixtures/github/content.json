@@ -1,0 +1,9 @@
+{
+  "type": "file",
+  "encoding": "base64",
+  "size": 64,
+  "name": "guide.md",
+  "path": "docs/guide.md",
+  "content": "IyBHdWlkZQoKUmVpbWJ1cnNlbWVudCBpcyBwYWlkIHdpdGhpbiAxMCBkYXlzLgo=",
+  "sha": "3d21ec53a331a6f037a91c368710b99387d012c1"
+}
