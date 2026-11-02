@@ -1,0 +1,28 @@
+{
+  "name": "company-brain-connectors",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@8.15.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "structure": "node tools/structure-lint/bin/cli.mjs",
+    "guard:fakes": "node tools/fake-guard/bin/cli.mjs",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "biome check ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.4",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@types/node": "24",
+    "@vitest/coverage-v8": "^5.0.5",
+    "lefthook": "^2.2.2",
+    "turbo": "^2.11.10",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
