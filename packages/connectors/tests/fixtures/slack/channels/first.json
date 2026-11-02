@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "channels": [
+    { "id": "C01GEN", "name": "general", "is_channel": true, "is_private": false, "is_archived": false, "is_member": true, "updated": 1761900000000 },
+    {
+      "id": "G02LEAD",
+      "name": "leadership",
+      "is_channel": false,
+      "is_group": true,
+      "is_private": true,
+      "is_archived": false,
+      "is_member": true,
+      "updated": 1761990000000
+    }
+  ],
+  "response_metadata": { "next_cursor": "dGVhbTpDMDNSRU1PVEU=" }
+}

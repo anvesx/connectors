@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "members": [
+    { "id": "U01ALICE", "deleted": false, "is_bot": false },
+    { "id": "U02BOB", "deleted": false, "is_bot": false },
+    { "id": "U03GONE", "deleted": true, "is_bot": false },
+    { "id": "B01", "deleted": false, "is_bot": true },
+    { "id": "USLACKBOT", "deleted": false, "is_bot": false }
+  ],
+  "response_metadata": { "next_cursor": "" }
+}

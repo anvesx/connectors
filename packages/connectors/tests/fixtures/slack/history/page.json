@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "messages": [
+    { "type": "message", "user": "U02BOB", "text": "Expenses are due Friday.", "ts": "1761999999.000200" },
+    { "type": "message", "subtype": "bot_message", "bot_id": "B01", "text": "Deploy finished", "ts": "1761999000.000100" },
+    { "type": "message", "user": "U01ALICE", "text": "Welcome to the channel", "ts": "1761990000.000300" }
+  ],
+  "has_more": false
+}

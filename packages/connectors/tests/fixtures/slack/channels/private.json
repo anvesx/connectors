@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "channels": [
+    { "id": "G02LEAD", "name": "leadership", "is_group": true, "is_private": true, "is_archived": false, "is_member": true, "updated": 1761990000000 }
+  ],
+  "response_metadata": { "next_cursor": "" }
+}

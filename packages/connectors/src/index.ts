@@ -7,3 +7,5 @@ export { driveManifest } from "./drive/manifest.js";
 export { createGithubConnector, type GithubConfig } from "./github/connector.js";
 export { githubManifest } from "./github/manifest.js";
 export type { ChangeEvent, ChangeSet, CommonConfig, SourceConnector } from "./shared/types.js";
+export { createSlackConnector, type SlackConfig } from "./slack/connector.js";
+export { slackManifest } from "./slack/manifest.js";

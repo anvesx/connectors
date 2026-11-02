@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "channels": [
+    { "id": "C03OPEN", "name": "random", "is_channel": true, "is_private": false, "is_archived": false, "is_member": false, "updated": 1761800000000 }
+  ],
+  "response_metadata": { "next_cursor": "" }
+}
