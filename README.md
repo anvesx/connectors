@@ -3,7 +3,7 @@
 # connectors
 
 A catalog of connectors that let software read documents from other apps, and a small set of adapters that do the
-reading. Today it ships Google Drive and GitHub. Anyone can add another app, and a company can plug in its own system
+reading. Today it ships Google Drive, GitHub, Slack and Gmail. Anyone can add another app, and a company can plug in its own system
 over plain HTTP without changing this repository.
 
 The only package is `packages/connectors`, published as `@anvesx/connectors`. Its own README lists the API.

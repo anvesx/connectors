@@ -1,5 +1,7 @@
 import { driveManifest } from "../drive/manifest.js";
 import { githubManifest } from "../github/manifest.js";
+import { gmailManifest } from "../gmail/manifest.js";
+import { slackManifest } from "../slack/manifest.js";
 import { createRegistry, type Registry } from "./registry.js";
 import type { Manifest } from "./types.js";
 
@@ -8,6 +10,8 @@ export function createBuiltinRegistry(): Registry {
   const r = createRegistry();
   r.register(githubManifest);
   r.register(driveManifest);
+  r.register(slackManifest);
+  r.register(gmailManifest);
   return r;
 }
 

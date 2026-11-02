@@ -1,8 +1,9 @@
 # @anvesx/connectors
 
-A catalog of connector manifests and source adapters, built on the vendors' own SDKs: GitHub (`@octokit/rest`) and
-Google Drive (`@googleapis/drive`). Each adapter is a `Connector` from `@brain/connector-kit` with
+A catalog of connector manifests and source adapters, built on the vendors' own SDKs: GitHub (`@octokit/rest`),
+Google Drive (`@googleapis/drive`), Slack (`@slack/web-api`) and Gmail (`@googleapis/gmail`). Each adapter is a `Connector` from `@brain/connector-kit` with
 `enforcesUserToken: true`, plus a `changes` method. OAuth is out of scope: callers pass tokens in.
+Slack channels default to the company zone and Gmail messages to the personal zone; both implement `canRead`, and Slack also `listMemberships`.
 
 The connector contract (`@brain/connector-kit`) and its shared types (`@brain/core-types`) are peer dependencies. They
 are not published yet, so the repository README explains how they are resolved for now.

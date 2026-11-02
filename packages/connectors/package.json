@@ -1,7 +1,7 @@
 {
   "name": "@anvesx/connectors",
   "version": "0.1.0",
-  "description": "A catalog of connector manifests and source adapters (Google Drive, GitHub) with support for custom HTTP connectors.",
+  "description": "A catalog of connector manifests and source adapters (Google Drive, GitHub, Slack, Gmail) with support for custom HTTP connectors.",
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
