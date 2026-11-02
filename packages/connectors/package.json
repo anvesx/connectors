@@ -1,0 +1,34 @@
+{
+  "name": "@anvesx/connectors",
+  "version": "0.1.0",
+  "description": "A catalog of connector manifests and source adapters (Google Drive, GitHub) with support for custom HTTP connectors.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@googleapis/drive": "27.0.0",
+    "@octokit/rest": "22.0.1"
+  },
+  "peerDependencies": {
+    "@brain/connector-kit": ">=0.1.0",
+    "@brain/core-types": ">=0.1.0"
+  },
+  "devDependencies": {
+    "@brain/connector-kit": "link:../../../company-brain/features/connector-kit",
+    "@brain/core-types": "link:../../../company-brain/features/core-types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anvesx/connectors.git",
+    "directory": "packages/connectors"
+  },
+  "license": "UNLICENSED"
+}
