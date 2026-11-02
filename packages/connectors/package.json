@@ -25,7 +25,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json && cp -R tests/fixtures dist/tests/fixtures",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "mutate": "stryker run"
   },
   "dependencies": {
     "@googleapis/drive": "27.0.0",
@@ -39,7 +40,9 @@
   },
   "devDependencies": {
     "@anvesx/connector-kit": "link:../../../company-brain/features/connector-kit",
-    "@anvesx/core-types": "link:../../../company-brain/features/core-types"
+    "@anvesx/core-types": "link:../../../company-brain/features/core-types",
+    "@stryker-mutator/core": "^10.1.1",
+    "@stryker-mutator/vitest-runner": "^10.1.1"
   },
   "repository": {
     "type": "git",
