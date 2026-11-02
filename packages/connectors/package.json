@@ -38,13 +38,17 @@
     "@anvesx/core-types": ">=0.1.0"
   },
   "devDependencies": {
-    "@anvesx/connector-kit": "link:../../../company-brain/features/connector-kit",
-    "@anvesx/core-types": "link:../../../company-brain/features/core-types"
+    "@anvesx/connector-kit": "0.1.0",
+    "@anvesx/core-types": "0.1.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anvesx/connectors.git",
     "directory": "packages/connectors"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  }
 }

@@ -12,10 +12,13 @@
     "test": "turbo run test",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-    "lint": "biome check ."
+    "lint": "biome check .",
+    "release": "changeset publish",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.4",
+    "@changesets/cli": "^3.0.3",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@types/node": "24",

@@ -3,23 +3,27 @@ on:
   pull_request:
   push:
     branches: [main]
+permissions:
+  contents: read
+  packages: read
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - uses: pnpm/action-setup@v4
         with: { version: 8.15.0 }
       - uses: actions/setup-node@v4
-        with: { node-version: 26, cache: pnpm }
-      - name: Build the shared contracts
-        run: |
-          git clone --depth 1 https://github.com/anvesx/company-brain.git ../company-brain
-          cd ../company-brain
-          pnpm install --frozen-lockfile --filter "@anvesx/connector-kit..."
-          pnpm --filter @anvesx/core-types --filter @anvesx/connector-kit build
-      - run: pnpm install --frozen-lockfile
+        with: { node-version: 26, cache: pnpm, registry-url: "https://npm.pkg.github.com", scope: "@anvesx" }
+      - run: pnpm install --no-frozen-lockfile
+      - uses: actions/upload-artifact@v4
+        with: { name: lockfile, path: pnpm-lock.yaml }
       - run: pnpm structure
       - run: pnpm guard:fakes
       - run: pnpm exec biome check .

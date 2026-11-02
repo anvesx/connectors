@@ -1,0 +1,26 @@
+name: release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+concurrency: release
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 8.15.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 26, cache: pnpm, registry-url: "https://npm.pkg.github.com", scope: "@anvesx" }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @anvesx/connectors build
+      # Publishes the package when its version is not on the registry yet.
+      # Bump versions with `pnpm changeset version` and commit.
+      - run: pnpm release
