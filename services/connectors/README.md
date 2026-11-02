@@ -6,7 +6,7 @@ Google Drive (`@googleapis/drive`), Slack (`@slack/web-api`) and Gmail (`@google
 Slack channels default to the company zone and Gmail messages to the personal zone; both implement `canRead`, and Slack also `listMemberships`.
 
 The connector contract (`@anvesx/connector-kit`) and its shared types (`@anvesx/core-types`) are peer dependencies. They
-are not published yet, so the repository README explains how they are resolved for now.
+are installed from GitHub Packages, and the repository README explains the token that install needs.
 
 ## Interface
 

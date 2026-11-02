@@ -51,19 +51,31 @@ before use. Set `canRead` to `true` only if the service implements `/can-read`.
 
 ## Shared contracts
 
-The `Connector` type lives in `@anvesx/connector-kit` and the shared types in `@anvesx/core-types`, both in
-[anvesx/company-brain](https://github.com/anvesx/company-brain) under `features/`. This package lists them as peer
-dependencies. They are not on any registry yet, and a git install cannot work: the packages have no build output in
-git and depend on each other through `workspace:*`. Until a registry is chosen, a development install links a
-sibling checkout:
+The `Connector` type lives in `@anvesx/connector-kit` and the shared types in `@anvesx/core-types`. Both are
+published from [anvesx/company-brain](https://github.com/anvesx/company-brain) to GitHub Packages, and this package
+lists them as peer dependencies and installs them as dev dependencies at `0.1.0`.
+
+GitHub Packages needs a token even for public packages. `.npmrc` points the `@anvesx` scope at
+`https://npm.pkg.github.com` and reads the token from `NODE_AUTH_TOKEN`. Before `pnpm install`, export a classic
+personal access token with `read:packages`:
 
 ```sh
-git clone https://github.com/anvesx/company-brain.git ../company-brain
-(cd ../company-brain && pnpm install --filter @anvesx/connector-kit... && pnpm --filter @anvesx/core-types --filter @anvesx/connector-kit build)
+export NODE_AUTH_TOKEN=<token with read:packages>
 pnpm install
 ```
 
-CI does the same steps before it installs this repository.
+CI uses the repository secret `NPM_READ_TOKEN` for the same purpose, because the Actions `GITHUB_TOKEN` cannot read
+packages owned by another repository. The structure lint still comes from a sibling checkout of company-brain:
+
+```sh
+git clone https://github.com/anvesx/company-brain.git ../company-brain
+```
+
+## Release
+
+Describe a change with `pnpm changeset` and commit the file. The `release` workflow runs on every push to `main`,
+builds the package and publishes `@anvesx/connectors` to GitHub Packages with the Actions `GITHUB_TOKEN` when its
+version is not on the registry yet.
 
 ## Develop
 
@@ -71,7 +83,7 @@ CI does the same steps before it installs this repository.
 pnpm test        # Vitest, one package at a time through turbo
 pnpm typecheck
 pnpm lint        # Biome
-pnpm structure   # strict lint from company-brain/tools/structure-lint (needs the sibling checkout): files at most 80 lines, at most 5 per folder, README everywhere, tests in tests/ beside src
+pnpm structure   # strict lint from company-brain/tools/structure-lint (needs the sibling checkout from above): files at most 80 lines, at most 5 per folder, README everywhere, tests in tests/ beside src
 pnpm guard:fakes # no mocks or in-memory stand-ins in integration tests
 ```
 
