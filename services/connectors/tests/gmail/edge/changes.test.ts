@@ -34,7 +34,7 @@ describe("gmail changes edges", () => {
   });
   it("keeps the cursor and reports no events when history is empty", async () => {
     expect(await at("10")).toEqual({ events: [], next: "10" });
-    expect(calls(replay, `${U}/history`).at(-1)).toEqual({ startHistoryId: "10" });
+    expect(calls(replay, `${U}/history`).at(-1)).toEqual({ startHistoryId: "10", maxResults: "500" });
   });
   it("lets the last event for a message win and skips records without ids", async () => {
     expect(await at("5")).toEqual({

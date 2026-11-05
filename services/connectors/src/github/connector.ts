@@ -1,18 +1,28 @@
 import { ConnectorError } from "@anvesx/connector-kit";
-import { Octokit } from "@octokit/rest";
-import { badCursor, guarded, statusOf } from "../shared/errors.js";
+import { badCursor, guarded, statusOf, toConnectorError } from "../shared/errors.js";
+import { isRateLimited, pageCap, retryCap } from "../shared/limits.js";
 import type { CommonConfig, SourceConnector } from "../shared/types.js";
 import { changesSince } from "./changes.js";
+import { createClient, DEFAULT_RETRIES, type InternalLimits, type LimitOptions } from "./limits/octokit.js";
+import { paginateCapped } from "./limits/paginate.js";
 import { isListable, mapAcl, mapDoc } from "./map.js";
 import { listTeamMembers } from "./members/members.js";
 
-export type GithubConfig = CommonConfig & { owner: string; repo: string; baseUrl?: string };
+/** `maxPages` defaults to 30 pages of 100 = 3000 items for each walk (collaborators, teams, team members). `changes` reads one compare page (300 files at most) and ignores it. */
+export type GithubConfig = CommonConfig & LimitOptions & { owner: string; repo: string; baseUrl?: string };
+
+export const DEFAULT_MAX_PAGES = 30;
 
 /** GitHub repository adapter: documents are the repo's text blobs on the default branch, the ACL is repo-level. */
-export const createGithubConnector = (config: GithubConfig): SourceConnector => {
+export const createGithubConnector = (config: GithubConfig): SourceConnector => buildGithubConnector(config);
+
+/** The same adapter with test-only knobs (`msPerSecond`), kept off the public config and not exported from `index.ts`. */
+export const buildGithubConnector = (config: GithubConfig, internal: InternalLimits = {}): SourceConnector => {
   const { owner, repo } = config;
   const target = { owner, repo };
-  const client = (token: string) => new Octokit({ auth: token, ...(config.baseUrl ? { baseUrl: config.baseUrl } : {}) });
+  const maxPages = pageCap(config.maxPages, DEFAULT_MAX_PAGES);
+  retryCap(config.maxRetries, DEFAULT_RETRIES); // reject a bad maxRetries when the connector is created, not on the first call
+  const client = (token: string) => createClient(token, config.baseUrl, { ...config, ...internal });
   return {
     id: config.id,
     enforcesUserToken: true,
@@ -28,8 +38,8 @@ export const createGithubConnector = (config: GithubConfig): SourceConnector => 
         const offset = Number(match?.[2] ?? 0);
         if (match !== null && offset >= docs.length) throw badCursor();
         const [collaborators, teams] = await Promise.all([
-          octokit.paginate(octokit.rest.repos.listCollaborators, { ...target, per_page: 100 }),
-          octokit.paginate(octokit.rest.repos.listTeams, { ...target, per_page: 100 }).catch((e: unknown) => {
+          paginateCapped(octokit, "collaborators", maxPages, octokit.rest.repos.listCollaborators, { ...target, per_page: 100 }),
+          paginateCapped(octokit, "teams", maxPages, octokit.rest.repos.listTeams, { ...target, per_page: 100 }).catch((e: unknown) => {
             if (statusOf(e) === 404) return [];
             throw e;
           }),
@@ -41,15 +51,15 @@ export const createGithubConnector = (config: GithubConfig): SourceConnector => 
       });
     },
     async listMemberships() {
-      return guarded(`${owner}/${repo}`, () => listTeamMembers(client(config.listToken), target));
+      return guarded(`${owner}/${repo}`, () => listTeamMembers(client(config.listToken), target, maxPages));
     },
     async canRead(_address, { token }) {
       try {
         await client(token).rest.repos.get(target);
         return true;
       } catch (e) {
-        if (statusOf(e) === 404 || statusOf(e) === 403) return false;
-        throw e;
+        if (!isRateLimited(e) && (statusOf(e) === 404 || statusOf(e) === 403)) return false;
+        throw toConnectorError(e, "canRead");
       }
     },
     async fetch(address, { token, signal }) {

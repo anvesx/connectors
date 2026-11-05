@@ -31,6 +31,8 @@
   "dependencies": {
     "@googleapis/drive": "27.0.0",
     "@googleapis/gmail": "^22.0.2",
+    "@octokit/plugin-retry": "8.1.1",
+    "@octokit/plugin-throttling": "11.0.5",
     "@octokit/rest": "22.0.1",
     "@slack/web-api": "^8.3.0"
   },
