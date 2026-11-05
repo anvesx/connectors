@@ -85,7 +85,12 @@ pnpm typecheck
 pnpm lint        # Biome
 pnpm structure   # strict lint from company-brain/tools/structure-lint (needs the sibling checkout from above): files at most 80 lines, at most 5 per folder, README everywhere, tests in tests/ beside src
 pnpm guard:fakes # no mocks or in-memory stand-ins in integration tests
+pnpm --filter @anvesx/connectors mutate # Stryker, break below 80
 ```
+
+`vitest.config.ts` and `stryker.config.json` live in this root, shared by every package, so a package root
+stays at five files (the structure lint counts config files). The Stryker `configFile` path has four `..`
+segments because Stryker runs vitest from its sandbox, two folders below the package.
 
 Commits follow Conventional Commits, with body lines of at most 100 columns. Hooks run through lefthook and must not
 be bypassed.

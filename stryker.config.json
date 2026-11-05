@@ -3,8 +3,17 @@
   "mutate": ["src/slack/**/*.ts", "src/gmail/**/*.ts", "src/catalog/**/*.ts", "!src/catalog/registry/types.ts"],
   "concurrency": 1,
   "plugins": ["./node_modules/@stryker-mutator/vitest-runner/dist/src/index.js"],
-  "thresholds": { "high": 90, "low": 80, "break": 80 },
+  "thresholds": {
+    "high": 90,
+    "low": 80,
+    "break": 80
+  },
   "reporters": ["clear-text", "json"],
-  "jsonReporter": { "fileName": "reports/mutation.json" },
-  "ignoreStatic": true
+  "jsonReporter": {
+    "fileName": "reports/mutation.json"
+  },
+  "ignoreStatic": true,
+  "vitest": {
+    "configFile": "../../../../vitest.config.ts"
+  }
 }
