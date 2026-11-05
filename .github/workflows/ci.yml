@@ -1,24 +1,25 @@
 name: ci
 on:
   pull_request:
+  workflow_dispatch:
   push:
     branches: [main]
+permissions:
+  contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - uses: pnpm/action-setup@v4
         with: { version: 8.15.0 }
       - uses: actions/setup-node@v4
-        with: { node-version: 26, cache: pnpm }
-      - name: Build the shared contracts
-        run: |
-          git clone --depth 1 https://github.com/anvesx/company-brain.git ../company-brain
-          cd ../company-brain
-          pnpm install --frozen-lockfile --filter "@anvesx/connector-kit..."
-          pnpm --filter @anvesx/core-types --filter @anvesx/connector-kit build
+        with: { node-version: 26, cache: pnpm, registry-url: "https://npm.pkg.github.com", scope: "@anvesx" }
+      - name: Fetch company-brain for the structure lint
+        run: git clone --depth 1 https://github.com/anvesx/company-brain.git ../company-brain
       - run: pnpm install --frozen-lockfile
       - run: pnpm structure
       - run: pnpm guard:fakes
