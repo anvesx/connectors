@@ -16,4 +16,8 @@ export type CommonConfig = {
   /** Token used by `list`, which has no per-call token in the `Connector` contract (an indexing identity). */
   listToken: string;
   zone?: Zone;
+  /** Most pages one paginated walk may fetch before it stops; each connector documents its default and the items that implies. */
+  maxPages?: number;
+  /** Longest `Retry-After`, in seconds, to sleep through before retrying a rate limit; a longer one fails at once with `RATE_LIMITED`. Default 60. */
+  maxWaitSeconds?: number;
 };

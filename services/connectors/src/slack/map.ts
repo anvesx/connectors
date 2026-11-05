@@ -2,6 +2,8 @@ import { ConnectorError, type ListedDoc } from "@anvesx/connector-kit";
 import type { Zone } from "@anvesx/core-types";
 import { buildAcl } from "../shared/acl.js";
 import { badCursor } from "../shared/errors.js";
+import { pageLimit, UpstreamLimitError } from "../shared/limits.js";
+import { RATE_LIMITED_CODE } from "./retry.js";
 
 export type SlackChannel = { id?: string; name?: string; is_private?: boolean; updated?: number };
 export type SlackMessage = { user?: string; bot_id?: string; text?: string; ts?: string };
@@ -43,17 +45,20 @@ export const guardSlack = async <T>(what: string, run: () => Promise<T>): Promis
     if (code === "invalid_cursor") throw badCursor();
     if (code === "channel_not_found") throw new ConnectorError("NOT_FOUND", `Not found: ${what}`);
     if (code !== undefined && FORBIDDEN.has(code)) throw new ConnectorError("FORBIDDEN", `Forbidden: ${what}`);
+    // `rateLimitedFetch` (retry.ts) answers a 429 it gives up on with this code.
+    if (code === RATE_LIMITED_CODE) throw new UpstreamLimitError("RATE_LIMITED", `Rate limited: ${what}`);
     throw error;
   }
 };
 
-/** Follows `next_cursor` until Slack returns an empty one, collecting every page. */
-export const pages = async <T extends Paged>(call: (cursor?: string) => Promise<T>): Promise<T[]> => {
+/** Follows `next_cursor` until Slack returns an empty one, collecting every page. After `maxPages` pages with more to come it throws PAGE_LIMIT (callers need the complete set). */
+export const pages = async <T extends Paged>(what: string, maxPages: number, call: (cursor?: string) => Promise<T>): Promise<T[]> => {
   const out: T[] = [];
   for (let cursor: string | undefined; ; ) {
     const page = await call(cursor);
     out.push(page);
     cursor = page.response_metadata?.next_cursor || undefined;
     if (cursor === undefined) return out;
+    if (out.length >= maxPages) throw pageLimit(what, maxPages);
   }
 };

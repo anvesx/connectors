@@ -1,4 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { buildGithubConnector } from "../../src/github/connector.js";
 import { createGithubConnector } from "../../src/index.js";
 import { fixture, type Replay, startReplay } from "../../src/testing/replay.js";
 
@@ -28,10 +29,12 @@ describe("github canRead with the asker's own token", () => {
     }
   });
 
-  it("throws on a server error instead of guessing", async () => {
+  it("throws on a server error instead of guessing, after the retry plugin's retries", async () => {
     const r = await startReplay({ [R]: { status: 500, body: { message: "boom" } } });
-    const c = createGithubConnector({ id: "gh", owner: "acme", repo: "handbook", listToken: "i", baseUrl: r.url });
+    // msPerSecond 1 keeps the plugin's backoff to a few milliseconds.
+    const c = buildGithubConnector({ id: "gh", owner: "acme", repo: "handbook", listToken: "i", baseUrl: r.url }, { msPerSecond: 1 });
     await expect(c.canRead?.("README.md", { token: "bob" })).rejects.toThrow();
+    expect(r.seen).toHaveLength(4); // the first try plus three retries
     await r.close();
   });
 });

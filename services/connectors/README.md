@@ -37,6 +37,14 @@ const delta = await github.changes({ token: INDEXER_TOKEN, cursor: baseline.next
 Known limits: the GitHub ACL is repo-level (listing collaborators needs push access for `listToken`), not per file;
 Drive `permissions` in `files.list` can be incomplete for files the indexer cannot share.
 
+## Limits
+
+- **Rate limits.** Drive, Gmail and Slack take `retries` (default 3) and GitHub takes `maxRetries` (default 3); each must be an integer of at least 0, else creating the connector throws `RangeError`. Every adapter takes `maxWaitSeconds` (default 60). A limit that outlasts the retries throws `UpstreamLimitError` with code `RATE_LIMITED`.
+  - **GitHub:** `@octokit/plugin-retry` (5xx), `plugin-throttling` (primary and secondary limits) and a small plugin for a plain 429 with `Retry-After`. That plugin steps aside when `x-ratelimit-remaining` is "0", the message says "secondary rate", or the body has `errors[].type` `RATE_LIMITED`, since the throttling plugin owns those. 5xx and rate limits share one budget per request, at most `maxRetries + 1` calls. A `Retry-After` above `maxWaitSeconds` fails at once for secondary limits and plain 429s; a primary limit waits until `x-ratelimit-reset` (not `Retry-After`) and fails at once when that wait is above `maxWaitSeconds`. A rate-limited 403 is `RATE_LIMITED`, not `FORBIDDEN`. An abort signal is honoured between calls, not during a `Retry-After` sleep, so an abort can land up to `maxWaitSeconds` late; no extra call is made.
+  - **Drive and Gmail:** gaxios `retryConfig` (429, 408, 5xx and a 403 whose reason is `rateLimitExceeded` or `userRateLimitExceeded`, GET only; a plain 403 stays `FORBIDDEN`). A `Retry-After` above `maxWaitSeconds` fails at once.
+  - **Slack:** the SDK's own sleep cannot be cut short, so a `fetch` wrapper is the only retry layer and the SDK's `retryConfig.retries` is 0. 429s, 5xx and network failures share one budget, at most `retries + 1` calls. A `Retry-After` above `maxWaitSeconds` fails at once; a missing or non-numeric one waits 1 second.
+- **Paging.** Every paginated walk stops at `maxPages`. Defaults: GitHub 30 pages of 100 = 3000 items; Drive changes 50 pages of 1000 = 50,000 changes; Gmail changes 50 pages of 500 = 25,000 history records; Slack 100 pages of 200 = 20,000 items. Past the cap, GitHub and Slack throw `UpstreamLimitError` `PAGE_LIMIT`; Drive and Gmail `changes` return the events so far and a resumable cursor as `next` (Gmail: `<history id>:<page token>`). `maxPages` must be an integer of at least 1, else creating the connector throws `RangeError`. GitHub's commit compare lists files only on page 1 and at most 300 for the whole comparison, so it makes one request and throws `PAGE_LIMIT` at 300 files or more (exactly 300 cannot be told from more).
+
 ## Verify
 
 ```sh

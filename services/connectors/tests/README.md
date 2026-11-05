@@ -6,3 +6,5 @@ Everything that verifies the package lives here, beside `src/`, in folders that 
 - The replay and Drive server helpers that the package exports live in `src/testing/`
 
 Tests run the real vendor SDKs against local HTTP servers, never mocks. Live API tests (`live.test.ts`) skip themselves unless their token variables are set (see the package README).
+
+`limits/` folders under `github/`, `drive/`, `gmail/` and `slack/` test rate-limit retries and page caps against local HTTP servers.

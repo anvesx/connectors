@@ -62,3 +62,11 @@ describe("github connector over the vendor SDK", () => {
     await expect(github.changes({ token: "t", cursor: "2".repeat(40) })).rejects.toMatchObject({ code: "BAD_CURSOR" });
   });
 });
+
+describe("github public config", () => {
+  it("does not accept the test-only msPerSecond knob (a compile-time check, run by typecheck)", () => {
+    // @ts-expect-error msPerSecond lives on buildGithubConnector's internal options, not on GithubConfig
+    const config: Parameters<typeof createGithubConnector>[0] = { id: "g", owner: "a", repo: "b", listToken: "t", msPerSecond: 1 };
+    expect(config.id).toBe("g");
+  });
+});
